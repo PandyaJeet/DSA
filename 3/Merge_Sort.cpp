@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-int size = 0;
+int si = 0;
 bool swapped;
 void assing_value(int arr[], int n);
 void bubble_sort(int arr[], int n)
@@ -28,19 +28,19 @@ void merge_sort(int arr1[], int arr2[], int arr[], int n1, int n2)
     while (i < n1 && j < n2)
     {
         if (arr1[i] < arr2[j])
-            arr[size++] = arr1[i++];
+            arr[si++] = arr1[i++];
         else if (arr2[j] < arr1[i])
-            arr[size++] = arr2[j++];
+            arr[si++] = arr2[j++];
         else if (arr1[i] == arr2[j])
         {
-            arr[size++] = arr1[i++];
+            arr[si++] = arr1[i++];
             j++;
         }
     }
     while (i < n1)
-        arr[size++] = arr1[i++];
+        arr[si++] = arr1[i++];
     while (j < n2)
-        arr[size++] = arr2[j++];
+        arr[si++] = arr2[j++];
 }
 
 void assign_value(int arr[], int n)
@@ -52,7 +52,7 @@ void display(int arr[])
 {
     int i = 0;
     cout << "Final Array : ";
-    while (i < size)
+    while (i < si)
         cout << arr[i++] << " ";
 }
 int main()
