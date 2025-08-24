@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+void merge_sort(int arr1[],int arr2[],int arr[]){
+
+}
+int main(){
+    int n,m;
+    cout << "Enter size of first array : ";
+    cin >> n;
+    cout << "Enter size of second array : ";
+    cin >> m;
+    int arr1[n],arr2[m],arr[n+m];
+    cout << "Enter elements of first array : ";
+    for(int i=0;i<n;i++){
+        cin >> arr1[i];
+    }
+    cout << "Enter elements of second array : ";
+    for(int i=0;i<m;i++){
+        cin >> arr2[i];
+    }
+    merge_sort(arr1,arr2,arr);
+    cout << "Merged array is : ";
+    for(int i=0;i<n+m;i++){
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
