@@ -1,0 +1,90 @@
+// Stack Push 
+Step 1 : [Check if stack is full or have some space]
+	if top = max then 
+		write "Stack is Overflow" and exit
+	end if 
+Step 2 : [Increment the top pointer]
+	top = top + 1
+Step 3 : [Assign value in Stack]
+	s[top] = ele
+Step 4 : Exit
+
+//Stack Pop 
+Step 1 : [Check if stack is underflow]
+	if Top = 0 then 
+		write "Stack is underflow" and exit
+	end if
+Step 2 : [Store TOP pointer value]
+	ele = s[top]
+Step 3 : [Decrement the top pointer]
+	top = top -1
+Step 4 : exit
+
+//Stack Peep 
+Step 1 : [Check if valid position is input]
+	if Top-Pos < 0 then 
+		write "Invalid choice" and exit
+	end if 
+Step 2 : [Return Stack]
+	Return [s [Top - Pos + 1]]
+Step 3 : Exit
+
+//Change 
+Step 1 : [Check for valid input]
+	if Top - Pos < 0 then 
+		write "Invalid Choice" and exit
+	end if
+Step 2 :[Assign value ] 
+	s[top-pos+1] = ele
+Step 3 :Exit
+
+//Queue Insert
+Step 1 : if Rear = Max then 
+		write "Queue is Overflow" and exit
+	end if
+Step 2 : Rear = Rear + 1
+Step 3 : Q[Rear] = ele
+Step 4 : if front =0 then 
+		front = front + 1
+	end if 
+Step 5 : Exit
+
+//QUEUE Delete
+Step 1 : if front = 0 then 
+		write "Queue is empty" and exit
+	end if 
+Step 2 : ele = Q[Front]
+Step 3 : if front = rear then
+	front = 0
+	rear = 0
+	else
+		front = front + 1
+Step 4 : exit
+
+
+//Circular Queue Insert
+Step 1 : If Front = 1 and Rear = Max or Front = Rear + 1
+		write "Queue is full" and exit
+	end if 
+Step 2 : If rear = max then
+		rear = 1
+	else rear = rear + 1
+Step 3 : if front <= 0 then
+		Front =1
+Step 4 : q[REAR] = ele
+Step 5 : exit x
+
+//Circular Delete
+Step 1 : if front <= 0 then
+		write "Queue is underflow"and exit
+	end if
+Step 2 :ele = q[front]
+Step 3 : if front = rear then 
+		front = 0
+		rear = 0
+	end if
+Step 4 : if front = max then
+		front = 1
+	else 
+		front = front + 1
+Step 5 : Return ele
