@@ -1,11 +1,15 @@
 #include <iostream>
 #include <malloc.h>
+
 using namespace std;
+
 int pos,count;
+
 struct NODE{
 	int data;
 	struct NODE * next;
-}*node,*head,*last,*temp,*del;
+}*node,*head,*last,*temp;
+
 void create_at_begin(){
 	node=(struct NODE*)malloc(sizeof(struct NODE));
 	cout << "Enter data : ";
@@ -18,6 +22,7 @@ void create_at_begin(){
 		head=node;
 	}
 }
+
 void create_at_last(){
 	node=(struct NODE*)malloc(sizeof(struct NODE));
 	cout << "Enter data : ";
@@ -30,6 +35,7 @@ void create_at_last(){
 		last=node;
 	}
 }
+
 void counti(){
 	temp=head;
 	while(temp!='\0'){
@@ -38,6 +44,7 @@ void counti(){
 	}
 	
 }
+
 void create_at_mid(){ 
 	cout << "Enter position to enter : ";
     cin  >> pos;
@@ -67,6 +74,7 @@ void create_at_mid(){
         temp->next = node;
 	}
 }
+
 void display(){
 	temp=head;
 	while(temp!='\0'){
@@ -74,6 +82,7 @@ void display(){
 		temp=temp->next;
 	}
 }
+
 void delete_front(){
 	if(head == '\0')
 		cout << "No Elements to delete" <<endl;
@@ -83,6 +92,7 @@ void delete_front(){
 		free(temp);
 	}
 }
+
 void delete_last(){
 	counti();
 	temp=head;
@@ -92,10 +102,20 @@ void delete_last(){
 	last=temp;
 	last->next='\0';
 }
+
 void delete_mid(){
 	temp=head;
 	cout << "Enter position to delete : ";
 	cin >>pos;
+	if(pos==1)
+		delete_front();
+	else if(pos<=count)
+		delete_last();
+	else if(pos < 0 || pos > count){
+		cout << "Enter valid position" <<endl;
+		return;
+	}
+	else{
 	int p=0;
 	while(temp!='\0'){
 		p++;
@@ -109,6 +129,8 @@ void delete_mid(){
 		temp=temp->next;
 	}
 }
+}
+
 void delet(){
 	int ch;
 	cout << "1.Delete from front"<<endl;
@@ -129,6 +151,7 @@ void delet(){
 			break;
 	}
 }
+
 int main()
 {
     int ch;
