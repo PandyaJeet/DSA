@@ -5,7 +5,7 @@ int pos,count;
 struct NODE{
 	int data;
 	struct NODE * next;
-}*node,*head,*last,*temp,*counto;
+}*node,*head,*last,*temp,*del;
 void create_at_begin(){
 	node=(struct NODE*)malloc(sizeof(struct NODE));
 	cout << "Enter data : ";
@@ -80,7 +80,7 @@ void delete_front(){
 	else{
 		temp=head;
 		head=head->next;
-		delete temp;
+		free(temp);
 	}
 }
 void delete_last(){
@@ -88,7 +88,7 @@ void delete_last(){
 	temp=head;
 	while(temp->next!=last)
 		temp=temp->next;
-	delete last;
+	free(last);
 	last=temp;
 	last->next='\0';
 }
@@ -100,10 +100,12 @@ void delete_mid(){
 	while(temp!='\0'){
 		p++;
 		if(p==pos-1){
+			NODE * t = temp->next;
 			temp->next=temp->next->next;			
-			free(temp->next);
+			free(t);
 			return;
 		}
+		else
 		temp=temp->next;
 	}
 }
