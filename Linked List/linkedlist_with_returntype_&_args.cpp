@@ -4,41 +4,41 @@ using namespace std;
 class NODE{
     private:
         NODE *node,*head,*last,*temp;
-    public:
         int data;
         NODE * next;
-    
+    public:
+
     void create_at_begin(){
-        o.node =(NODE*) malloc (sizeof(NODE));
+        this->node =(NODE*) malloc (sizeof(NODE));
         cout << "Enter data : ";
-        cin >> o.node->data;
-        o.node->next = NULL;
-        if(o.head == NULL)
-            o.head=o.last=NULL;
+        cin >> this->node->data;
+        this->node->next = NULL;
+        if(this->head == NULL)
+            this->head=this->last=NULL;
         else{
-            o.head->next=o.node;
-            o.node=o.head;
+            this->head->next=this->node;
+            this->node=this->head;
         }
     }
     
     void create_at_last(){
-        o.node=(NODE*)malloc(sizeof(NODE));
+        this->node=(NODE*)malloc(sizeof(NODE));
         cout << "Enter data : ";
-        cin >> o.node->data;
-        o.node->next=NULL;
-        if(o.head==NULL)
-            o.head=o.last=NULL;
+        cin >> this->node->data;
+        this->node->next=NULL;
+        if(this->head==NULL)
+            this->head=this->last=NULL;
         else{
-            o.last->next=node;
-            o.last=o.node;
+            this->last->next=node;
+            this->last=this->node;
         }    
     }
     
     void display(){
-        o.temp=o.head;
-        while(o.temp!=NULL){
-            cout << "Data is " << o.temp->data;
-            o.temp=o.temp->next;
+        this->temp=this->head;
+        while(this->temp!=NULL){
+            cout << "Data is " << this->temp->data;
+            this->temp=this->temp->next;
         }
     }
 
@@ -59,7 +59,7 @@ int main(){
                 o.create_at_begin();
                 break;
             case 2:
-//                create_at_last();
+                o.create_at_last();
                 break;
             case 3:
 //                create_at_mid();
