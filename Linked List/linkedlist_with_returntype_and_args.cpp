@@ -9,11 +9,15 @@ class NODE{
         NODE * next;
     public:
 
-    void create_at_begin(){
+    void memory_alloc(){
         node =(NODE*) malloc (sizeof(NODE));
         cout << "Enter data : ";
         cin >> node->data;
         node->next = NULL;
+    }
+    
+    void create_at_begin(){
+        memory_alloc();
         if(head == NULL)
             head=last=node;
         else{
@@ -23,10 +27,7 @@ class NODE{
     }
     
     void create_at_last(){
-        node=(NODE*)malloc(sizeof(NODE));
-        cout << "Enter data : ";
-        cin >> node->data;
-        node->next=NULL;
+        memory_alloc();
         if(head==NULL)
             head=last=node;
         else{
