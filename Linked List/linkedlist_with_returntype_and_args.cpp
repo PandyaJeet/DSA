@@ -10,36 +10,36 @@ class NODE{
     public:
 
     void create_at_begin(){
-        this->node =(NODE*) malloc (sizeof(NODE));
+        node =(NODE*) malloc (sizeof(NODE));
         cout << "Enter data : ";
-        cin >> this->node->data;
-        this->node->next = NULL;
-        if(this->head == NULL)
-            this->head=this->last=NULL;
+        cin >> node->data;
+        node->next = NULL;
+        if(head == NULL)
+            head=last=node;
         else{
-            this->head->next=this->node;
-            this->node=this->head;
+            node->next=head;
+            head=node;
         }
     }
     
     void create_at_last(){
-        this->node=(NODE*)malloc(sizeof(NODE));
+        node=(NODE*)malloc(sizeof(NODE));
         cout << "Enter data : ";
-        cin >> this->node->data;
-        this->node->next=NULL;
-        if(this->head==NULL)
-            this->head=this->last=NULL;
+        cin >> node->data;
+        node->next=NULL;
+        if(head==NULL)
+            head=last=node;
         else{
-            this->last->next=node;
-            this->last=this->node;
+            last->next=node;
+            last=node;
         }    
     }
     
     void display(){
-        this->temp=this->head;
-        while(this->temp!=NULL){
-            cout << "Data is " << this->temp->data;
-            this->temp=this->temp->next;
+        temp=head;
+        while(temp!=NULL){
+            cout << "Data is " << temp->data <<endl;
+            temp=temp->next;
         }
     }
 
