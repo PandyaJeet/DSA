@@ -14,8 +14,8 @@ void create_at_begin(){
 	node=(struct NODE*)malloc(sizeof(struct NODE));
 	cout << "Enter data : ";
 	cin >> node->data;
-	node->next='\0';
-	if(head=='\0')
+	node->next=NULL;
+	if(head==NULL)
 		head=last=node;
 	else{
 		node->next=head;
@@ -27,8 +27,8 @@ void create_at_last(){
 	node=(struct NODE*)malloc(sizeof(struct NODE));
 	cout << "Enter data : ";
 	cin >> node->data;
-	node->next='\0';
-	if(head=='\0')
+	node->next=NULL;
+	if(head==NULL)
 		head=last=node;
 	else{
 		last->next=node;
@@ -38,7 +38,7 @@ void create_at_last(){
 
 void counti(){
 	temp=head;
-	while(temp!='\0'){
+	while(temp!=NULL){
 		count++;
 		temp=temp->next;
 	}
@@ -77,14 +77,14 @@ void create_at_mid(){
 
 void display(){
 	temp=head;
-	while(temp!='\0'){
+	while(temp!=NULL){
 		cout << "Data is "<<temp->data <<endl;
 		temp=temp->next;
 	}
 }
 
 void delete_front(){
-	if(head == '\0')
+	if(head == NULL)
 		cout << "No Elements to delete" <<endl;
 	else{
 		temp=head;
@@ -100,9 +100,9 @@ void delete_last(){
 		temp=temp->next;
 	free(last);
 	last=temp;
-	last->next='\0';
+	last->next=NULL;
 }
-
+/*
 void delete_mid(){
 	temp=head;
 	cout << "Enter position to delete : ";
@@ -117,7 +117,7 @@ void delete_mid(){
 	}
 	else{
 	int p=0;
-	while(temp!='\0'){
+	while(temp!=NULL){
 		p++;
 		if(p==pos-1){
 			NODE * t = temp->next;
@@ -129,6 +129,33 @@ void delete_mid(){
 		temp=temp->next;
 	}
 }
+}*/
+
+void delete_mid(){
+	cout << "Enter position to delete : ";
+	cin>> pos;
+	counti();
+	if(pos==1)
+		delete_front();
+	else if(pos==count)
+		delete_last();
+	else if(pos < 0 || pos > count){
+		cout << "Enter valid position" <<endl;
+		return;
+	}
+	else{
+		temp=head;
+		int p=0;
+		while(temp!=NULL){
+			p++;
+			if(p==pos-1){
+
+				temp->next=temp->next->next;
+				return;
+			}
+			temp=temp->next;
+		}
+	}
 }
 
 void delet(){
