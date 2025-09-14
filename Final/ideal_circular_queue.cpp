@@ -5,7 +5,8 @@ using namespace std;
 int arr[MAX], ele, FRONT = -1, REAR = -1;
 
 void insert() {
-    if ((FRONT == 0 && REAR == MAX - 1) || (REAR + 1) % MAX == FRONT) {
+    if ((FRONT == 0 && REAR == MAX - 1) || 
+        (REAR + 1) % MAX == FRONT) {
         cout << "Queue is full\n";
         return;
     }
