@@ -43,23 +43,24 @@ void display()
 int main()
 {
     int ch;
-    cout << "Insert\nDelete\nDisplay\nChoice : ";
-    cin >> ch;
-    switch (ch)
-    {
-    case 1:
-        insert();
-        main();
-        break;
-    case 2:
-        delet();
-        main();
-        break;
-    case 3:
-        display();
-        main();
-        break;
-    default:
-        return 0;
+    while (true) {
+        cout << "1.Insert\n2.Delete\n3.Display\n4.Exit\nChoice : ";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            insert();
+            break;
+        case 2:
+            delet();
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            return 0;
+        default:
+            cout << "Invalid choice\n";
+        }
     }
 }
