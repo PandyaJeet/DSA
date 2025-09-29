@@ -69,12 +69,63 @@ void create_at_mid(){
 }
 
 void delete_at_begin(){
+    if(head == NULL){
+        cout << "List is empty\n";
+        return;
+    }
+
     temp=head;
     head=head->next;
     free(temp);
+    if(head == NULL) last = NULL;
 }
 
+void delete_at_end(){
+    if(head == NULL){
+        cout << "List is empty\n";
+        return;
+    }
 
+    if(head->next == NULL){ 
+        free(head);
+        head = last = NULL;
+        return;
+    }
+
+    temp = head;
+    while(temp->next != last){
+        temp = temp->next;
+    }
+
+    free(last);
+    last = temp;
+    last->next = NULL;
+}
+
+void delete_at_mid (){
+    int pos,count;
+    cout << "Enter position : ";
+    cin >> pos;
+    count = counti();
+    if (pos == 1){
+        delete_at_begin();
+        return;
+    }
+    else if (pos == count ){
+        delete_at_end();
+        return;
+    }
+    else if (pos >1 && pos <count){
+        struct Linked*tem;
+        temp=head;
+        for(int i = 1; i < pos-1 ; i ++){
+            temp=temp->next;
+        }
+        tem=temp->next;
+        temp->next=temp->next->next;
+        free(tem);
+    }
+}
 void display(){
     temp = head;
     while ( temp != NULL){
@@ -85,18 +136,22 @@ void display(){
 
 int main() {
     int choice;
+
     while (1) {
         cout << "\n\n--- Singly Linked List Menu ---\n";
         cout << "1. Insert at Beginning\n";
         cout << "2. Insert at End\n";
         cout << "3. Insert at Middle\n";
-        cout << "4. Display\n";
-        cout << "5. Count Nodes\n";
-        cout << "6. Exit\n";
+        cout << "4. Delete at Beginning\n";
+        cout << "5. Delete at End\n";
+        cout << "6. Delete at Middle\n";
+        cout << "7. Display List\n";
+        cout << "8. Count Nodes\n";
+        cout << "9. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
-        switch (choice) {
+        switch(choice) {
             case 1:
                 create_at_begin();
                 break;
@@ -107,16 +162,25 @@ int main() {
                 create_at_mid();
                 break;
             case 4:
-                display();
+                delete_at_begin();
                 break;
             case 5:
-                cout << "Total Nodes: " << counti() << endl;
+                delete_at_end();
                 break;
             case 6:
-                cout << "Exiting Program.\n";
+                delete_at_mid();
+                break;
+            case 7:
+                display();
+                break;
+            case 8:
+                cout << "Total Nodes: " << counti() << endl;
+                break;
+            case 9:
+                cout << "Exiting program.\n";
                 exit(0);
             default:
-                cout << "Invalid Choice! Try again.\n";
+                cout << "Invalid choice! Try again.\n";
         }
     }
 
