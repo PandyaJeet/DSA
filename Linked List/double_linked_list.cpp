@@ -124,7 +124,7 @@ void display(){
 
 int main(){
     while (1){
-        cout << "1. Create at begin\n2. Create at last\n3. Create at mid\n4.Delete at begin\n5. Delete at last\n6. Delete at mid\n7.Display\n8.Exit\nEnter your choice : ";
+        cout << "1. Create at begin\n2. Create at last\n3. Create at mid\n4. Delete at begin\n5. Delete at last\n6. Delete at mid\n7. Display\n8. Exit\nEnter your choice : ";
         int choice;
         cin >> choice;
         switch (choice){
