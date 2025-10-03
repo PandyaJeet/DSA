@@ -1,148 +1,159 @@
 #include <iostream>
-#include <malloc.h>
 using namespace std;
-int count = 0;
-struct dblink
-{
+struct dblink{
     int data;
-    struct dblink *next, *prev;
-} *node, *head, *last, *temp;
-
-void create_at_begin()
-{
-    node = (struct dblink *)malloc(sizeof(struct dblink));
+    struct dblink *next,*prev;   
+}*node,*head,*last,*temp;
+int count;
+void create_at_begin(){
+    node = (struct dblink*)malloc(sizeof(struct dblink));
     cout << "Enter data : ";
     cin >> node->data;
-    node->next = node->prev = NULL;
-    if (head == NULL)
+    node->next = node->prev= NULL;
+    if(head == NULL)
         head = last = node;
-    else
-    {
+    else{
         node->next = head;
         head->prev = node;
         head = node;
     }
 }
 
-void create_at_last()
-{
-    node = (struct dblink *)malloc(sizeof(struct dblink));
+void create_at_last(){
+    node = (struct dblink*)malloc(sizeof(struct dblink));
     cout << "Enter data : ";
     cin >> node->data;
-    node->next = node->prev = NULL;
-    if (head == NULL)
+    node->next = node->prev= NULL;
+    if(head == NULL)
         head = last = node;
-    else
-    {
+    else{
         last->next = node;
         node->prev = last;
         last = node;
     }
 }
 
-void counti()
-{
-    count = 0;
+void counti(){
     temp = head;
-    while (temp != NULL)
-    {
-        temp = temp->next;
+    count = 0;
+    while(temp != NULL){
         count++;
+        temp = temp->next;
     }
 }
 
-void create_at_mid()
-{
-    counti();
+void create_at_mid(){
     int pos;
     cout << "Enter position : ";
     cin >> pos;
-    if (pos == 1)
-    {
+    counti();
+    if(pos == 0){
         create_at_begin();
         return;
     }
-    else if (pos == count - 1)
-    {
+    else if (pos == count){
         create_at_last();
         return;
     }
-    else if (pos > count && pos < 0)
-    {
+    else if(pos > count){
         cout << "Invalid position\n";
         return;
     }
-    else
-    {
-        node = (struct dblink *)malloc(sizeof(struct dblink));
+    else{
+        node = (struct dblink*) malloc (sizeof(struct dblink));
         cout << "Enter data : ";
         cin >> node->data;
         node->next = node->prev = NULL;
-        if (head == NULL)
-        {
-            head = last = node;
-        }
-        else
-        {
-            int p = 1;
-            temp = head;
-            while (p < pos)
-            {
-                p++;
+        temp = head;
+        for(int i=0; i<pos-1; i++)
                 temp = temp->next;
-            }
-            // node->next=temp->next;
-            // temp->next=node;
-            // node->prev=temp;
-            // temp->next->next->prev=node;
-            temp->next=node;
-            temp->next->prev=node;
+        node->next=temp->next;
+        temp->next->prev=node;
+        temp->next=node;
+        node->prev=temp;
+}
+}
 
-            node->next=temp->next->next;
-            node->prev=temp;
-        }
+void delete_at_begin(){
+    temp=head;
+    head->next->prev=NULL;
+    head=head->next;
+    free(temp);
+}
+
+void delete_at_last(){
+    temp=last;
+    last->prev->next=NULL;
+    last=last->prev;
+    free(temp);
+}
+
+void delete_at_mid(){
+    int pos;
+    cout << "Enter position : ";
+    cin >> pos;
+    counti();
+    if(pos == 0 ){
+        delete_at_begin();
+        return;
+    }
+    else if (pos == count-1){
+        delete_at_last();
+        return;
+    }
+    else if(pos >= count){
+        cout << "Invalid position\n";
+        return;
+    }
+    else{
+        temp = head;
+        for(int i=0; i<pos; i++)
+            temp = temp->next;
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;
+        free(temp);
     }
 }
-void display()
-{
+void display(){
     temp = head;
-    cout << "From Head\n";
-    while (temp != NULL)
-    {
+    while(temp != NULL){
         cout << "Data is " << temp->data << endl;
         temp = temp->next;
     }
-    cout << "From Last \n";
-    temp = last;
-    while (temp != NULL)
-    {
-        cout << "Data is " << temp->data << endl;
-        temp = temp->prev;
-    }
 }
 
-int main()
-{
-    int ch;
-    cout << "1.Begin\n2.Last\n3.Mid\n4.Display\nEnter choice : ";
-    cin >> ch;
-    switch (ch)
-    {
-    case 1:
-        create_at_begin();
-        main();
-        break;
-    case 2:
-        create_at_last();
-        main();
-        break;
-    case 3:
-        create_at_mid();
-        main();
-        break;
-    case 4:
-        display();
-        main();
-        break;
+int main(){
+    while (1){
+        cout << "1. Create at begin\n2. Create at last\n3. Create at mid\n4. Delete at begin\n5. Delete at last\n6. Delete at mid\n7. Display\n8. Exit\nEnter your choice : ";
+        int choice;
+        cin >> choice;
+        switch (choice){
+            case 1:
+                create_at_begin();
+                break;
+            case 2:
+                create_at_last();
+                break;
+            case 3:
+                create_at_mid();
+                break;
+            case 4:
+                delete_at_begin();
+                break;
+            case 5:
+                delete_at_last();
+                break;
+            case 6:
+                delete_at_mid();
+                break;  
+            case 7:
+                display();
+                break;
+            case 8:
+                exit(0);
+            default:
+                cout << "Invalid choice\n";
+                break;
     }
+}
 }
