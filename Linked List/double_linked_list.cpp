@@ -4,7 +4,7 @@ struct dblink{
     int data;
     struct dblink *next,*prev;   
 }*node,*head,*last,*temp;
-
+int count;
 void create_at_begin(){
     node = (struct dblink*)malloc(sizeof(struct dblink));
     cout << "Enter data : ";
@@ -33,10 +33,45 @@ void create_at_last(){
     }
 }
 
+void counti(){
+    temp = head;
+    count = 0;
+    while(temp != NULL){
+        count++;
+        temp = temp->next;
+    }
+}
+
 void create_at_mid(){
     int pos;
     cout << "Enter position : ";
     cin >> pos;
+    counti();
+    if(pos == 0){
+        create_at_begin();
+        return;
+    }
+    else if (pos == count){
+        create_at_last();
+        return;
+    }
+    else if(pos > count){
+        cout << "Invalid position\n";
+        return;
+    }
+    else{
+        node = (struct dblink*) malloc (sizeof(struct dblink));
+        cout << "Enter data : ";
+        cin >> node->data;
+        node->next = node->prev = NULL;
+        temp = head;
+        for(int i=0; i<pos-1; i++)
+                temp = temp->next;
+        node->next=temp->next;
+        temp->next->prev=node;
+        temp->next=node;
+        node->prev=temp;
+}
 }
 void display(){
     temp = head;
