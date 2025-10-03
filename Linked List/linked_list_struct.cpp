@@ -36,7 +36,7 @@ void create_at_last(){
 	}
 }
 
-void counti(){
+void counti(){ 
 	temp=head;
 	while(temp!=NULL){
 		count++;
