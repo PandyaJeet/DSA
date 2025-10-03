@@ -73,6 +73,47 @@ void create_at_mid(){
         node->prev=temp;
 }
 }
+
+void delete_at_begin(){
+    temp=head;
+    head->next->prev=NULL;
+    head=head->next;
+    free(temp);
+}
+
+void delete_at_last(){
+    temp=last;
+    last->prev->next=NULL;
+    last=last->prev;
+    free(temp);
+}
+
+void delete_at_mid(){
+    int pos;
+    cout << "Enter position : ";
+    cin >> pos;
+    counti();
+    if(pos == 0 ){
+        delete_at_begin();
+        return;
+    }
+    else if (pos == count-1){
+        delete_at_last();
+        return;
+    }
+    else if(pos >= count){
+        cout << "Invalid position\n";
+        return;
+    }
+    else{
+        temp = head;
+        for(int i=0; i<pos; i++)
+            temp = temp->next;
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;
+        free(temp);
+    }
+}
 void display(){
     temp = head;
     while(temp != NULL){
@@ -83,7 +124,7 @@ void display(){
 
 int main(){
     while (1){
-        cout << "1. Create at begin\n2. Create at last\n3. Display\n4. Exit\nEnter your choice : ";
+        cout << "1. Create at begin\n2. Create at last\n3. Create at mid\n4.Delete at begin\n5. Delete at last\n6. Delete at mid\n7.Display\n8.Exit\nEnter your choice : ";
         int choice;
         cin >> choice;
         switch (choice){
@@ -94,9 +135,21 @@ int main(){
                 create_at_last();
                 break;
             case 3:
-                display();
+                create_at_mid();
                 break;
             case 4:
+                delete_at_begin();
+                break;
+            case 5:
+                delete_at_last();
+                break;
+            case 6:
+                delete_at_mid();
+                break;  
+            case 7:
+                display();
+                break;
+            case 8:
                 exit(0);
             default:
                 cout << "Invalid choice\n";
