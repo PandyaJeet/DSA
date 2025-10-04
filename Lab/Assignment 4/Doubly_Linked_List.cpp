@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int count = -1;
+int counto=-1;
 
 struct Double_Linkedlist{
     int data;
@@ -28,9 +28,9 @@ void display(){
 }
 void counti(){
     temp=head;
-    count=-1;
+    counto=-1;
     while(temp!=NULL ){
-        count++;
+        counto++;
         temp=temp->next;
     }
 }
@@ -71,11 +71,11 @@ void create_at_position(){
         create_at_begin();
         return;
     }
-    else if (pos == count){
+    else if (pos == counto){
         create_at_last();
         return;
     }
-    else if (pos > 0 && pos < count){
+    else if (pos > 0 && pos < counto ) {
         node=(struct Double_Linkedlist* ) malloc (sizeof(struct Double_Linkedlist));
         cout << "Enter data : ";
         cin >> node->data;
@@ -138,11 +138,11 @@ void delete_at_pos(){
         delete_at_begin();
         return;
     }
-    else if (pos == count){
+    else if (pos == counto){
         delete_at_last();
         return;
     }
-    else if (pos > 0 && pos < count ) {
+    else if (pos > 0 && pos < counto) {
         temp = head;
         for(int i = 0 ; i < pos -1 ; i++)
             temp=temp->next;
@@ -161,13 +161,16 @@ int main(){
     int choice;
     head = last = NULL;
     
-    while(1){
+     while(1){
         cout << "\n1. Insert at beginning\n";
         cout << "2. Insert at end\n";
         cout << "3. Insert at position\n";
         cout << "4. Delete at beginning\n";
-        cout << "5. Display\n";
-        cout << "6. Exit\n";
+        cout << "5. Delete at end\n";
+        cout << "6. Delete at position\n";
+        cout << "7. Display\n";
+        cout << "8. Count nodes\n";
+        cout << "9. Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
         
@@ -185,14 +188,22 @@ int main(){
                 delete_at_begin();
                 break;
             case 5:
-                display();
+                delete_at_last();
                 break;
             case 6:
+                delete_at_pos();
+                break;
+            case 7:
+                display();
+                break;
+            case 8:
+                counti();
+                cout << "Total number of nodes : "<<counto<<endl;
+                break;
+            case 9:
                 return 0;
             default:
                 cout << "Invalid choice!" << endl;
         }
-    }
-    
-
-    }
+    }    
+}
