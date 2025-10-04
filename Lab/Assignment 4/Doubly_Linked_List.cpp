@@ -9,10 +9,14 @@ struct Double_Linkedlist{
     int data;
     struct Double_Linkedlist * next;
     struct Double_Linkedlist * prev;
-}*node,*head,*last,*temp;
+}*node,*head,*last,*temp , *t1;
 
 void display(){
     temp=head;
+    if(head == NULL){
+        cout << "List is NULL ";
+        return;
+    }
     int i = -1;
     while(temp!=NULL){
         i++;
@@ -91,19 +95,79 @@ void create_at_position(){
     }
 }
 
+void delete_at_begin(){
+    if (head == NULL ){
+        cout << "List is empty \n" ; 
+        return;
+    }
+    else if (head->next == NULL){
+        free (head);
+        head =last = NULL;
+    }
+    else {
+        temp=head;
+        head=head->next;
+        head->prev=NULL;
+        free(temp);
+    }
+}
 
+void delete_at_last(){
+    if (head == NULL ){
+        cout << "List is empty \n" ; 
+        return;
+    }
+    else if (head->next == NULL){
+        free (head);
+        head =last = NULL;
+    }    
+    else {
+    temp=last;
+    last=last->prev;
+    last->next=NULL;
+    free(temp);
+    }
+}
+
+void delete_at_pos(){
+    int pos;
+    cout << "Enter position : ";
+    cin >> pos;
+    counti();
+    if (pos == 0){
+        delete_at_begin();
+        return;
+    }
+    else if (pos == count){
+        delete_at_last();
+        return;
+    }
+    else if (pos > 0 && pos < count ) {
+        temp = head;
+        for(int i = 0 ; i < pos -1 ; i++)
+            temp=temp->next;
+        t1 = temp->next;
+        temp->next=temp->next->next;
+        if(t1->next!=NULL)
+            temp->next->prev = temp;
+        free(t1);
+    }
+    else 
+        cout << "Invalid Positon"<<endl;
+}
 
 int main(){
     
-        int choice;
+    int choice;
     head = last = NULL;
     
     while(1){
         cout << "\n1. Insert at beginning\n";
         cout << "2. Insert at end\n";
         cout << "3. Insert at position\n";
-        cout << "4. Display\n";
-        cout << "5. Exit\n";
+        cout << "4. Delete at beginning\n";
+        cout << "5. Display\n";
+        cout << "6. Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
         
@@ -118,9 +182,12 @@ int main(){
                 create_at_position();
                 break;
             case 4:
-                display();
+                delete_at_begin();
                 break;
             case 5:
+                display();
+                break;
+            case 6:
                 return 0;
             default:
                 cout << "Invalid choice!" << endl;
