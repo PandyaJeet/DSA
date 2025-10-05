@@ -1,5 +1,6 @@
 #include <iostream>
 #include <malloc.h>
+#include <algorithm>
 using namespace std;
 
 int counto = -1;
@@ -132,6 +133,50 @@ void reverse_linkedlist(){
         head=temp2;
     }
     head=temp;  
+}
+
+void sorting(){
+    if(head==NULL || head->next == NULL){
+       cout << "List is too small to be sorted " <<endl;
+       return;
+    }
+    struct SLL *i,*j;
+    bool swapped;
+    for(i = head;i->next != NULL ; i=i->next){
+        swapped = false;
+        for(j = i->next; j!=NULL ; j=j->next){
+            if(i->data > j->data){
+                swapped = true;
+                swap(i->data,j->data);
+            }
+        }
+        if(!swapped) break; 
+    }
+}
+    SLL *head2, *last2;
+void second_linked_list (){
+    node=(struct SLL * ) malloc (sizeof(struct SLL));
+    cout << "Enter data : ";
+    cin >> node->data;
+    node->next = NULL;
+    if(head == NULL)
+        head=last=NULL;
+    else{
+        head->next = node;
+        head=node;
+    }
+}
+
+void concatenate(){
+    if(head==NULL){
+        head=head2;
+        return;
+    }
+    temp=head;
+    while(temp->next != NULL)
+        temp=temp->next;
+    temp->next=head2;
+    cout << "Concatenation Successfull"<<endl;
 }
 
 int main(){
