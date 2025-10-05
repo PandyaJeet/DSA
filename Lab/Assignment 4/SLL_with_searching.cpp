@@ -247,49 +247,45 @@ void concatenate()
 }
 void Union_SLL()
 {
-    headfin = (SLL *)malloc(sizeof(SLL));
-    headfin->next = NULL;
     second_linked_list();
     sorting(head);
     sorting(head2);
+    SLL *t1 = head, *t2 = head2;
+    SLL *headfin = NULL, *lastfin = NULL;
 
-    if (head == NULL)
+    while (t1 != NULL && t2 != NULL)
     {
-        head->next = head2;
-        return;
-    }
-    SLL *t1, *t2;
-    int val;
-    t1 = head, t2 = head2, temp = headfin;
-    while (t1 != NULL || t2 != NULL)
-    {
+        int val;
         if (t1->data < t2->data)
+        {
+            val = t1->data;
+            t1 = t1->next;
+        }
+        else if (t1->data > t2->data)
         {
             val = t2->data;
             t2 = t2->next;
         }
-        else if (t1->data > t2->data)
-        {
-            val = t1->data;
-            t1 = t1->next;
-        }
         else
         {
             val = t1->data;
             t1 = t1->next;
             t2 = t2->next;
         }
+
         node = (SLL *)malloc(sizeof(SLL));
         node->data = val;
         node->next = NULL;
+
         if (headfin == NULL)
             headfin = lastfin = node;
         else
         {
-            headfin->next = node;
-            headfin = node;
+            lastfin->next = node;
+            lastfin = node;
         }
     }
+
     while (t1 != NULL)
     {
         node = (SLL *)malloc(sizeof(SLL));
@@ -304,6 +300,7 @@ void Union_SLL()
         }
         t1 = t1->next;
     }
+
     while (t2 != NULL)
     {
         node = (SLL *)malloc(sizeof(SLL));
@@ -318,7 +315,7 @@ void Union_SLL()
         }
         t2 = t2->next;
     }
-    cout << "Union of Linked List : " << endl;
+    cout << "Union of Linked Lists:" << endl;
     display(headfin);
 }
 int main()
