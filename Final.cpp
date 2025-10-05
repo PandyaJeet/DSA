@@ -178,18 +178,18 @@ struct SLL
 {
     int data;
     SLL *next;
-} *node, *Shead, *Slast, *Stemp;
+} *Snode, *Shead, *Slast, *Stemp;
 void create_at_pos()
 {
-    node=(struct SLL*) malloc (sizeof(struct SLL));
+    Snode=(struct SLL*) malloc (sizeof(struct SLL));
     cout << "Enter data : " ;
-    cin >> node->data;
-    node->next=NULL;
+    cin >> Snode->data;
+    Snode->next=NULL;
     if(Shead==NULL)
-        Shead=Slast=node;
+        Shead=Slast=Snode;
     else{
-        node->next=Shead;
-        Shead=node;
+        Snode->next=Shead;
+        Shead=Snode;
     }
 }
 void Ldisplay(){
@@ -247,7 +247,7 @@ void reverse(){
     }
     Shead=Stemp;
 }
-void ll()
+void sll()
 {
     int choice;
     Shead = Slast = NULL;
@@ -288,6 +288,50 @@ void ll()
         default:
             cout << "Invalid Choice "<<endl;
             break;
+        }
+    }
+}
+struct DBLL{
+    int data;
+    struct DBLL * next,*prev;
+}*node,*head,*last,*temp;
+void create_at_begin(){
+    node=(struct DBLL*) malloc (sizeof (struct DBLL));
+    cout << "Enter data : ";
+    cin >> node->data;
+    node->next = node->prev=NULL;
+    if(head == NULL ){
+        head=last=node;
+    }
+    else{
+    node->next=head;
+    head->prev=node;
+    head=node;
+    }
+}
+void create_at_delete(){
+    if(head==NULL){
+        cout << "List is empty" <<endl;
+        return;
+    }
+
+}
+void ll (){
+    int choice;
+    head=last=NULL;
+    while(1){
+        cout << "1.Create" <<endl;
+        cout << "2.Delete " <<endl;
+        cout << "3.Display" <<endl;
+        cout << "4.Exit" <<endl;
+        cin >> choice;
+        switch(choice){
+            case 1:
+                create_at_begin();
+                break;
+            case 3:
+                lldisplay();
+                break;
         }
     }
 }
