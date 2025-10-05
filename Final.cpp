@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #define MAX 5
 using namespace std;
 int TOP = -1, S[MAX];
@@ -177,63 +178,79 @@ struct SLL
 {
     int data;
     SLL *next;
-} *node, *head, *last, *temp;
+} *node, *Shead, *Slast, *Stemp;
 void create_at_pos()
 {
     node=(struct SLL*) malloc (sizeof(struct SLL));
     cout << "Enter data : " ;
     cin >> node->data;
     node->next=NULL;
-    if(head==NULL)
-        head=last=node;
+    if(Shead==NULL)
+        Shead=Slast=node;
     else{
-        node->next=head;
-        head=node;
+        node->next=Shead;
+        Shead=node;
     }
 }
 void Ldisplay(){
-    if(head==NULL){
+    if(Shead==NULL){
         cout << "List is empty \n";
         return;
     }
-    temp=head;
+    Stemp=Shead;
     int i = -1;
-    while(temp!=NULL){
+    while(Stemp!=NULL){
         cout << "-----" <<++i << "-----"<<endl;
-        cout << "Data : " << temp->data <<endl;
+        cout << "Data : " << Stemp->data <<endl;
         cout << "------------" <<endl;
-        temp=temp->next;
+        Stemp=Stemp->next;
     }
 }
 void delete_at_pos(){
-    if(head==NULL){
+    if(Shead==NULL){
         cout << "List is empty" <<endl;
         return;
     }
-    else if (head->next == NULL){
-        head=last=NULL;
+    else if (Shead->next == NULL){
+        Shead=Slast=NULL;
         return;
     }
-    temp=head;
-    head=head->next;
-    free(temp);
+    Stemp=Shead;
+    Shead=Shead->next;
+    free(Stemp);
 }
 void sort(){
+    if (Shead==NULL || Shead->next ==NULL){
+        cout << "List is too short to sort " <<endl;
+        return;
+    }
     bool swapped;
     SLL *i, *j;
-    for(i=head;i->next!=NULL;i=i->next){
+    for(i=Shead;i->next!=NULL;i=i->next){
         swapped = false;
-        for(j=i;j!= NULL ; j=j->next){
-            if(i->data < j->data){
+        for(j=i->next;j!= NULL ; j=j->next){
+            if(i->data > j->data){
                 swapped = true;
+                swap(i->data,j->data);
             }
         }
+        if(!swapped) break;
     }
+}
+void reverse(){
+    struct SLL * SStemp1, *SStemp2;
+    while(Shead!=NULL){
+        SStemp2=Shead->next;
+        Shead->next=Stemp;
+        Stemp=Shead;
+        Shead=SStemp2;
+    }
+    Shead=Stemp;
 }
 void ll()
 {
     int choice;
-    head = last = NULL;
+    Shead = Slast = NULL;
     while (1)
     {
         cout << "1.Create at Begin " << endl;
@@ -250,6 +267,20 @@ void ll()
             break;
         case 2:
             delete_at_pos();
+            break;
+        case 3:
+            cout << "Before Sorting : " <<endl;
+            Ldisplay();
+            sort();
+            cout << "After Sorting : " <<endl;
+            Ldisplay();
+            break;
+        case 4:
+            cout << "Before Sorting : " <<endl;
+            Ldisplay();
+            reverse();
+            cout << "After Sorting : " <<endl;
+            Ldisplay();
             break;
         case 5:
             Ldisplay();
