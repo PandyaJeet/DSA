@@ -10,7 +10,7 @@ In all possible implementations possible
 #define MAX 5
 using namespace std;
 
-void stack();
+void stack();	
 void stack_push();
 void stack_peep();
 void stack_change();
