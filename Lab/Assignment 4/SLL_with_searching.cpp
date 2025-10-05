@@ -123,6 +123,17 @@ void search_data(){
     cout << "Data isn't present" <<endl;
 }
 
+void reverse_linkedlist(){
+    struct SLL*temp1,*temp2;
+    while(head!=NULL){
+        temp2=head->next;
+        head->next=temp;
+        temp=head;
+        head=temp2;
+    }
+    head=temp;  
+}
+
 int main(){
     int choice;
     head=last=NULL;
@@ -132,8 +143,9 @@ int main(){
         cout << "3.Sum of data" <<endl;
         cout << "4.Count number of nodes" <<endl;
         cout << "5.Search given element" <<endl;
-        cout << "6.Display the data" <<endl;
-        cout << "7.Exit" <<endl;
+        cout << "6.Reverse the Linked List" <<endl;
+        cout << "7.Display all elements" <<endl;
+        cout << "8.Exit" <<endl;
         cin >> choice;
         switch(choice){
             case 1:
@@ -153,9 +165,16 @@ int main(){
                 search_data();
                 break;
             case 6:
+                cout << "Before Reversing : " <<endl;
+                display();
+                reverse_linkedlist();
+                cout << "After Reversing : " <<endl;
                 display();
                 break;
             case 7:
+                display();
+                break;
+            case 8:
                 exit(0);
             default:
                 cout << "Invalid choice" <<endl;
