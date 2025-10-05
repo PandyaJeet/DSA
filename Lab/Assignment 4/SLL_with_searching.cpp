@@ -10,18 +10,17 @@ struct SLL {
     struct SLL * next;
 }*node,*head,*last,*temp;
 
-void display(){
-    temp=head;
-    if(head==NULL){
+void display(struct SLL* h){
+    if(h==NULL){
         cout << "List is empty" <<endl;
         return;
     }
     int i = -1;
-    while(temp!=NULL){
+    while(h!=NULL){
         cout << "-----" << ++i << "-----" <<endl;
-        cout << "Data : " << temp->data ;
+        cout << "Data : " << h->data ;
         cout << endl << "------------" << endl;
-        temp=temp->next;
+        h=h->next;
     }
 }
 
@@ -135,14 +134,14 @@ void reverse_linkedlist(){
     head=temp;  
 }
 
-void sorting(){
-    if(head==NULL || head->next == NULL){
+void sorting(struct SLL * h){
+    if(h==NULL || h->next == NULL){
        cout << "List is too small to be sorted " <<endl;
        return;
     }
     struct SLL *i,*j;
     bool swapped;
-    for(i = head;i->next != NULL ; i=i->next){
+    for(i = h;i->next != NULL ; i=i->next){
         swapped = false;
         for(j = i->next; j!=NULL ; j=j->next){
             if(i->data > j->data){
@@ -155,18 +154,41 @@ void sorting(){
 }
     SLL *head2, *last2;
 void second_linked_list (){
-    node=(struct SLL * ) malloc (sizeof(struct SLL));
-    cout << "Enter data : ";
-    cin >> node->data;
-    node->next = NULL;
-    if(head == NULL)
-        head=last=NULL;
-    else{
-        head->next = node;
-        head=node;
+    int n;
+    cout << "How many nodes in second list? ";
+    cin >> n;
+
+    for(int i = 0; i < n; i++){
+        node=(struct SLL * ) malloc (sizeof(struct SLL));
+        cout << "Enter data " << i+1 << ": ";
+        cin >> node->data;
+        node->next = NULL;
+
+        if(head2 == NULL)
+            head2 = last2 = node;
+        else{
+            last2->next = node;
+            last2 = node;
+        }
     }
 }
 
+void merge(){
+    second_linked_list();
+    sorting(head2);
+    if(head == NULL){
+        head=head2;
+        return;
+    }
+    temp=head;
+    while(temp->next != NULL)
+        temp=temp->next;
+    temp->next=head2;
+    cout << "Successfully Merged!!!"<<endl;
+    display(head);
+}
+
+    
 void concatenate(){
     if(head==NULL){
         head=head2;
@@ -190,7 +212,9 @@ int main(){
         cout << "5.Search given element" <<endl;
         cout << "6.Reverse the Linked List" <<endl;
         cout << "7.Display all elements" <<endl;
-        cout << "8.Exit" <<endl;
+        cout << "8.Concatenate 2 Linked List " <<endl;
+        cout << "9.Merger 2 Linked List " <<endl;
+        cout << "10.Exit" <<endl;
         cin >> choice;
         switch(choice){
             case 1:
@@ -209,17 +233,28 @@ int main(){
             case 5:
                 search_data();
                 break;
-            case 6:
+            case 6:          
                 cout << "Before Reversing : " <<endl;
-                display();
+                display(head);
                 reverse_linkedlist();
                 cout << "After Reversing : " <<endl;
-                display();
+                display(head);               
                 break;
             case 7:
-                display();
+                cout << "First List : " <<endl;
+                display(head);
+                cout << "Second List : " <<endl;
+                display(head2);
                 break;
             case 8:
+                second_linked_list();
+                concatenate();
+                display(head);
+                break;
+            case 9:
+                merge();
+                break;
+            case 10:
                 exit(0);
             default:
                 cout << "Invalid choice" <<endl;
