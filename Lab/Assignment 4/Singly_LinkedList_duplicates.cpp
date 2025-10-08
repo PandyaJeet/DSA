@@ -6,7 +6,7 @@ struct SLL
 {
     int data;
     struct SLL *next;
-} *head = NULL, *last = NULL, *node, *temp;
+} *node,*head, *last, *temp;
 
 void display()
 {
