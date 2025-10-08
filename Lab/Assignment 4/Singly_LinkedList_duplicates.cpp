@@ -6,7 +6,7 @@ struct SLL
 {
     int data;
     struct SLL *next;
-} *node,*head, *last, *temp;
+} *node, *head, *last, *temp;
 
 void display()
 {
@@ -41,7 +41,7 @@ void insert_element()
     cout << "Element inserted successfully!" << endl;
 }
 
-void delete_element()
+void delete_from_end()
 {
     if (head == NULL)
     {
@@ -49,32 +49,22 @@ void delete_element()
         return;
     }
 
-    int key;
-    cout << "Enter element to delete: ";
-    cin >> key;
-
-    struct SLL *prev = NULL;
-    temp = head;
-
-    while (temp != NULL && temp->data != key)
+    if (head->next == NULL)
     {
-        prev = temp;
-        temp = temp->next;
-    }
-
-    if (temp == NULL)
-    {
-        cout << "Element not found." << endl;
+        free(head);
+        head = last = NULL;
+        cout << "Last element deleted successfully!" << endl;
         return;
     }
 
-    if (temp == head)
-        head = head->next;
-    else
-        prev->next = temp->next;
+    temp = head;
+    while (temp->next->next != NULL)
+        temp = temp->next;
 
-    free(temp);
-    cout << "Element deleted successfully!" << endl;
+    free(temp->next);
+    temp->next = NULL;
+    last = temp;
+    cout << "Last element deleted successfully!" << endl;
 }
 
 void remove_duplicates()
@@ -148,7 +138,7 @@ int main()
     {
         cout << "\n========== SINGLE LINKED LIST MENU ==========\n";
         cout << "1. Insert an element\n";
-        cout << "2. Delete an element\n";
+        cout << "2. Delete last element\n";
         cout << "3. Display all elements\n";
         cout << "4. Remove duplicates (unsorted list)\n";
         cout << "5. Count total number of duplicate elements\n";
@@ -162,7 +152,7 @@ int main()
             insert_element();
             break;
         case 2:
-            delete_element();
+            delete_from_end();
             break;
         case 3:
             display();
