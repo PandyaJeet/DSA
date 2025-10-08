@@ -318,23 +318,70 @@ void Union_SLL()
     cout << "Union of Linked Lists:" << endl;
     display(headfin);
 }
+void Intersection_SLL()
+{
+    second_linked_list();
+    sorting(head);
+    sorting(head2);
+    SLL *t1 = head, *t2 = head2;
+    SLL *headfin = NULL, *lastfin = NULL;
+
+    while (t1 != NULL && t2 != NULL)
+    {
+        if (t1->data < t2->data)
+            t1 = t1->next;
+        else if (t1->data > t2->data)
+            t2 = t2->next;
+        else
+        {
+            SLL *node = (SLL *)malloc(sizeof(SLL));
+            node->data = t1->data;
+            node->next = NULL;
+
+            if (headfin == NULL)
+                headfin = lastfin = node;
+            else
+            {
+                lastfin->next = node;
+                lastfin = node;
+            }
+            t1 = t1->next;
+            t2 = t2->next;
+        }
+    }
+
+    if (headfin == NULL)
+        cout << "No common elements found." << endl;
+    else
+    {
+        cout << "Intersection of Linked Lists:" << endl;
+        display(headfin);
+    }
+}
 int main()
 {
     int choice;
-    head = last = NULL;
-    while (1)
+    head = last = head2 = last2 = NULL;
+
+    while (true)
     {
-        cout << "1.Insert element from front" << endl;
-        cout << "2.Delete element from front" << endl;
-        cout << "3.Sum of data" << endl;
-        cout << "4.Count number of nodes" << endl;
-        cout << "5.Search given element" << endl;
-        cout << "6.Reverse the Linked List" << endl;
-        cout << "7.Display all elements" << endl;
-        cout << "8.Concatenate 2 Linked List " << endl;
-        cout << "9.Merger 2 Linked List " << endl;
-        cout << "10.Exit" << endl;
+        cout << "\n========= LINKED LIST OPERATIONS =========\n";
+        cout << "1.  Insert element at front (List 1)\n";
+        cout << "2.  Delete element from front (List 1)\n";
+        cout << "3.  Sum of elements (List 1)\n";
+        cout << "4.  Count number of nodes (List 1)\n";
+        cout << "5.  Search element in List 1\n";
+        cout << "6.  Reverse List 1\n";
+        cout << "7.  Display Lists\n";
+        cout << "8.  Create/Modify Second Linked List\n";
+        cout << "9.  Concatenate Lists (List1 + List2)\n";
+        cout << "10. Merge Lists (Sorted)\n";
+        cout << "11. Union of Lists\n";
+        cout << "12. Intersection of Lists\n";
+        cout << "13. Exit\n";
+        cout << "Enter your choice: ";
         cin >> choice;
+
         switch (choice)
         {
         case 1:
@@ -348,36 +395,45 @@ int main()
             break;
         case 4:
             counti();
-            cout << "Total number of element : " << counto << endl;
+            cout << "Total number of elements: " << counto + 1 << endl;
             break;
         case 5:
             search_data();
             break;
         case 6:
-            cout << "Before Reversing : " << endl;
+            cout << "Before Reversing:\n";
             display(head);
             reverse_linkedlist();
-            cout << "After Reversing : " << endl;
+            cout << "After Reversing:\n";
             display(head);
             break;
         case 7:
-            cout << "First List : " << endl;
+            cout << "\n--- First List ---\n";
             display(head);
-            cout << "Second List : " << endl;
+            cout << "\n--- Second List ---\n";
             display(head2);
             break;
         case 8:
             second_linked_list();
+            break;
+        case 9:
             concatenate();
             display(head);
             break;
-        case 9:
+        case 10:
+            merge();
+            break;
+        case 11:
             Union_SLL();
             break;
-        case 10:
+        case 12:
+            Intersection_SLL();
+            break;
+        case 13:
+            cout << "Exiting program..." << endl;
             exit(0);
         default:
-            cout << "Invalid choice" << endl;
+            cout << "Invalid choice. Try again." << endl;
             break;
         }
     }
