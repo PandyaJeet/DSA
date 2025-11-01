@@ -1,14 +1,47 @@
 #include <iostream>
 #include<malloc.h>
+#include <cstring>
 using namespace std;
 struct linked{
     int data;
+    char domain[10];
     linked * next;
 }*node,*head,*last,*temp;
-void create_at_begin(){
+void create_at_pos(){
+    node=(struct linked*) malloc (sizeof(struct linked));
+    cout << "Enter data : " ;
+    cin >> node->data;
+    cout << "Enter domain [AI, CLOUD, DS] : ";
+    cin >> node->domain;
+    node->next=NULL;
+    if(head==NULL)
+        head=last=node;
+    else {
+        struct linked * prev;
+        if (strcmp(node->domain,"CLOUD") == 0 ){
+            temp=head;
+            while(temp!=NULL){
+                if (strcmp(node->domain,"CLOUD")==0){
+                    break;
+                }
+                prev=temp;
+                temp=temp->next;
+            }
+            node->next=temp;
+            prev->next=node;
+        }
+        else{
+            node->next=head;
+            head=node;
+        }
+    }
+}
+/*void create_at_begin(){
     node=(struct linked* ) malloc (sizeof(struct linked));
     cout << "Enter data : ";
     cin >> node->data;
+    cout << "Enter domain [AI, CLOUD, DS] : ";
+    cin >> node->domain;
     node->next=NULL;
     if (head == NULL)
         head=last=node;
@@ -256,3 +289,4 @@ int main() {
 
     return 0;
 }
+*/
