@@ -21,7 +21,7 @@ void create_at_pos(){
         if (strcmp(node->domain,"CLOUD") == 0 ){
             temp=head;
             while(temp!=NULL){
-                if (strcmp(node->domain,"CLOUD")==0){
+                if (strcmp(temp->domain,"CLOUD")==0){
                     break;
                 }
                 prev=temp;
@@ -34,6 +34,15 @@ void create_at_pos(){
             node->next=head;
             head=node;
         }
+    }
+}
+void display(){
+    if(head==NULL){
+        cout << "List is empty" <<endl;
+        return;
+    }
+    temp=head;
+    while(temp!=NULL){
     }
 }
 /*void create_at_begin(){
