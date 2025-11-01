@@ -159,25 +159,30 @@ int main() {
     head = last = NULL;
 
     while (1) {
-        cout << "\n---- MAIN MENU ----\n";
-        cout << "1. Create\n";
-        cout << "2. Display\n";
-        cout << "3. Exit\n";
-        cout << "Enter choice: ";
+        cout << "\n========================================\n";
+        cout << "       LINKED LIST OPERATIONS\n";
+        cout << "========================================\n";
+        cout << "1. Insert Node\n";
+        cout << "2. Delete Node\n";
+        cout << "3. Display List\n";
+        cout << "4. Count Nodes\n";
+        cout << "5. Exit\n";
+        cout << "========================================\n";
+        cout << "Enter your choice: ";
         cin >> mainChoice;
 
         switch (mainChoice) {
-            case 1:
+            case 1:  // Insert submenu
                 while (1) {
-                    cout << "\n--- CREATE MENU ---\n";
-                    cout << "1. At Beginning\n";
-                    cout << "2. At End\n";
-                    cout << "3. At Position\n";
+                    cout << "\n--- INSERT MENU ---\n";
+                    cout << "1. Insert at Beginning\n";
+                    cout << "2. Insert at End\n";
+                    cout << "3. Insert at Position\n";
                     cout << "4. Back to Main Menu\n";
                     cout << "Enter choice: ";
                     cin >> subChoice;
 
-                    if (subChoice == 4) break; 
+                    if (subChoice == 4) break;
 
                     switch (subChoice) {
                         case 1:
@@ -190,23 +195,64 @@ int main() {
                             create_at_pos();
                             break;
                         default:
-                            cout << "Invalid choice\n";
+                            cout << "Invalid choice! Please try again.\n";
                             break;
                     }
                 }
                 break;
 
-            case 2:
+            case 2:  // Delete submenu
+                while (1) {
+                    cout << "\n--- DELETE MENU ---\n";
+                    cout << "1. Delete from Beginning\n";
+                    cout << "2. Delete from End\n";
+                    cout << "3. Delete from Position\n";
+                    cout << "4. Back to Main Menu\n";
+                    cout << "Enter choice: ";
+                    cin >> subChoice;
+
+                    if (subChoice == 4) break;
+
+                    switch (subChoice) {
+                        case 1:
+                            delete_at_begin();
+                            break;
+                        case 2:
+                            delete_at_end();
+                            break;
+                        case 3:
+                            delete_at_pos();
+                            break;
+                        default:
+                            cout << "Invalid choice! Please try again.\n";
+                            break;
+                    }
+                }
+                break;
+
+            case 3:  // Display
                 display();
                 break;
 
-            case 3:
-                cout << "Exiting program...\n";
-                return 0; 
+            case 4:  // Count
+                {
+                    int count = counti();
+                    cout << "\nTotal nodes in the list: " << count << endl;
+                }
+                break;
+
+            case 5:  // Exit
+                cout << "\n========================================\n";
+                cout << "Thank you for using the program!\n";
+                cout << "Exiting...\n";
+                cout << "========================================\n";
+                return 0;
 
             default:
-                cout << "Invalid choice\n";
+                cout << "Invalid choice! Please enter 1-5.\n";
                 break;
         }
     }
+
+    return 0;
 }
