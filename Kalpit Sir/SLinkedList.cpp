@@ -83,10 +83,10 @@ void insfirst()
 	node=(struct SList*)malloc(sizeof(struct SList));
 	cout<<"\nENTER THE VALUE: ";
 	cin>>node->info;
+	node->next='\0';
 	if(head=='\0')
 	{
 		head=node;
-		node->next='\0';
 		last=node;
 	}
 	else
