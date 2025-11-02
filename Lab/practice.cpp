@@ -105,6 +105,9 @@ void delete_at_pos()
 
     }
 }
+void sort(){
+    
+}
 int main()
 {
     int choice;
