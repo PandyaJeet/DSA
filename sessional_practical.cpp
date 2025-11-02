@@ -2,7 +2,7 @@
 #include<malloc.h>
 #include <cstring>
 using namespace std;
-struct linked{
+/*struct linked{
     int data;
     char domain[10];
     linked * next;
@@ -21,10 +21,9 @@ void create_at_pos(){
         if (strcmp(node->domain,"CLOUD") == 0 ){
             temp=head;
             while(temp!=NULL){
-                if (strcmp(temp->domain,"CLOUD")==0){
-                    break;
+                if (strcmp(temp->domain,"DS")==0){
+                    prev=temp;
                 }
-                prev=temp;
                 temp=temp->next;
             }
             node->next=temp;
@@ -42,9 +41,35 @@ void display(){
         return;
     }
     temp=head;
+    int i=-1;
     while(temp!=NULL){
+        cout << "-----" << i++ << "-----" <<endl;
+        cout << " Data : " << temp->data <<endl;
+        cout << " Domain : " << temp->domain << endl;
+        cout << "---------------" <<endl;
+        temp=temp->next;
     }
 }
+int main(){
+    int choice;
+    while (1){
+        cout << "1.Create " <<endl;
+        cout << "2.Display" <<endl;
+        cout << "Enter choice : " <<endl;
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                create_at_pos();
+                break;
+            case 2:
+                display();
+                break;
+            default :
+                cout << "Invalid choice" <<endl;
+                exit(0);
+        }
+    }
+}*/
 /*void create_at_begin(){
     node=(struct linked* ) malloc (sizeof(struct linked));
     cout << "Enter data : ";
