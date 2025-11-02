@@ -13,7 +13,7 @@ void bubble_sort(char arr[],int n){
         swapped = false;
         for(int j = 0 ; j < n - i - 1 ; j ++){
             if (arr[j] > arr[j+1]){
-                swap(arr[i] , arr[j]);  
+                swap(arr[j] , arr[j+1]);  
                 swapped = true;
             }
         }
@@ -32,15 +32,36 @@ void selection_sort(char arr[],int n ){
         if(minIndex!=i) swap(arr[i],arr[minIndex]);
     }
 }
-void binary_search
+void binary_search(char arr[], int n) {
+    char key;
+    cout << "Enter key : ";
+    cin >> key;
+    int left=0,right=n-1,mid;
+    while(left<=right){
+        mid=(left+right)/2;
+        if(arr[mid ] == key){
+            cout << "Element found at " << mid << endl;
+            return;
+        }
+        else{
+            if(arr[mid] < key)
+                left=mid+1;
+            else 
+                right = mid-1;
+        }
+    }
+}
 int main(){
     char arr[100];
     cout << "Enter string : ";
     cin >> arr;
     cout << "String : " <<endl;
     int len = length(arr);
-    selection_sort(arr,len);
-    bubble_sort(arr,len);
     for(int i = 0 ; i < len ; i ++ )
         cout << arr[i] << endl;
+    selection_sort(arr,len);
+    //bubble_sort(arr,len);
+    for(int i = 0 ; i < len ; i ++ )
+        cout << arr[i] << endl;
+    binary_search(arr,len);
 }
